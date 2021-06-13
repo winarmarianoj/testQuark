@@ -18,7 +18,6 @@ public class FactoryEntities {
         return factory;
     }
 
-
     public Store createStore() {
         Store store = new Store();
         store.setStoreId(Long.valueOf(1));

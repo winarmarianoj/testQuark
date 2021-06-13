@@ -5,7 +5,6 @@ import com.marianowinar.gui.Welcome;
 import com.marianowinar.gui.panels.HistoryPanel;
 import com.marianowinar.gui.panels.MainPanel;
 import com.marianowinar.gui.panels.WelcomePanel;
-import com.marianowinar.logic.entity.Quotes;
 import com.marianowinar.logic.messages.MessageInformation;
 
 import javax.swing.*;
@@ -17,14 +16,12 @@ import static com.marianowinar.gui.panels.WelcomePanel.QUIT;
 public class HistoryController extends Controller{
 
     private final History history;
-    private final MainPanel mainPanel;
 
     public HistoryController(History history, MainPanel panel) {
         super(history, panel);
         this.history = history;
         this.history.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.history.setVisible(true);
-        this.mainPanel = panel;
     }
 
     @Override
@@ -47,6 +44,5 @@ public class HistoryController extends Controller{
         }
 
     }
-
 
 }

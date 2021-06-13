@@ -1,0 +1,36 @@
+Por favor, especifica tu nombre completo: Mariano Javier Wiñar
+
+1. ¿C# permite herencia múltiple?
+2. ¿Cuándo utilizaría una Clase Abstracta en lugar de una Interfaz? Ejemplifique.
+3. ¿Qué implica una relación de Generalización entre dos clases?
+4. ¿Qué implica una relación de Implementación entre una clase y una interfaz?
+5. ¿Qué diferencia hay entre la relación de Composición y la Agregación?
+6. Indique V o F según corresponda. Diferencia entre Asociación y Agregación:
+	a. Una diferencia es que la segunda indica la relación entre un “todo” y
+	sus “partes”, mientras que en la primera los objetos están al mismo
+	nivel contextual.
+	b. Una diferencia es que la Agregación es de cardinalidad 1 a muchos
+	mientras que la Asociación es de 1 a 1.
+	c. Una diferencia es que, en la Agregación, la vida o existencia de los
+	objetos relacionados está fuertemente ligada, es decir que si “muere”
+	el objeto contenedor también morirán las “partes”, en cambio en la
+	Asociación los objetos viven y existen independientemente de la
+	relación.
+
+Respuestas:
+
+1- No acepta herencia múltiple al igual que el lenguaje Java.
+
+2- Interfaz es dependencia total, teniendo que implementar todas aquellas funciones o métodos declaradas en ella, en cambio la Abstracta puede o no tener que implementarlas (solo sería si o si cuando se especifica la palabra reservada abstract).
+
+3- La generalización (o especialización según se mire) es una relación entre dos clases de modo que una, la subclase o clase hija, se considera como forma especializada (refinada) de la otra, la superclase o clase padre.
+
+4- Como mencionaba en el punto 2, se realizan este tipos de relaciones para que sea una dependencia de uso total, implementando todas aquellas funciones declaradas en la Interfaz, debiendo desarrollar dicho método en la clase que la implemente.
+
+5- Una relación de Agregación es estar agregando un atributo dentro de una clase u objeto el cual su campo es la representación de toda una clase con todos sus atributos, pero dicha relación es liviana ya que no es necesaria para la existencia si o si de aquella que la compone.
+En cambio la relación de Composición es agregar un atributo dentro de una clase u objeto el cual ese campo representa toda un clase completa con todos sus atributos pero ésta si es una relación del tipo fuerte ya que si necesita para su existencia ésta relación.
+
+6- Verdadero o falso:
+	a = Falso
+	b = Verdadero
+	c = Falso

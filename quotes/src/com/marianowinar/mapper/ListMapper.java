@@ -3,7 +3,6 @@ package com.marianowinar.mapper;
 import com.marianowinar.logic.entity.Pants;
 import com.marianowinar.logic.entity.Shirt;
 import com.marianowinar.logic.factory.FactoryEntities;
-import com.marianowinar.persistance.impl.ListShirt;
 
 import java.util.ArrayList;
 import java.util.List;

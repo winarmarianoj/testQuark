@@ -1,6 +1,5 @@
 package com.marianowinar.persistance.impl;
 
-import com.marianowinar.logic.entity.Pants;
 import com.marianowinar.logic.entity.Shirt;
 import com.marianowinar.persistance.IListPersistance;
 

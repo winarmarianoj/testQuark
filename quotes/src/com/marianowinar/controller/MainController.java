@@ -12,10 +12,14 @@ import com.marianowinar.logic.entity.Shirt;
 import com.marianowinar.logic.enums.Neck;
 import com.marianowinar.logic.enums.TypePants;
 import com.marianowinar.logic.enums.TypeShirt;
+import com.marianowinar.logic.exception.Exceptions;
+import com.marianowinar.logic.exception.InvalidStockException;
 import com.marianowinar.logic.factory.FactoryEntities;
+import com.marianowinar.logic.messages.MessageError;
 import com.marianowinar.logic.messages.MessageInformation;
-import com.marianowinar.mapper.ListMapper;
 import com.marianowinar.util.Helper;
+import com.marianowinar.util.logger.Errors;
+import com.marianowinar.util.validator.Validator;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,10 +28,10 @@ import static com.marianowinar.gui.panels.MainPanel.*;
 
 public class MainController extends Controller{
     private final Start start;
-    private final WelcomePanel welcomePanel;
     private final FactoryEntities factory;
-    private final ListMapper mapper;
     private final Helper helper;
+    private final Validator validator;
+    private final Errors errors;
 
     public MainController(Start starts) {
         super(starts);
@@ -35,10 +39,10 @@ public class MainController extends Controller{
         this.start.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.start.setVisible(true);
         this.start.getPanel();
-        welcomePanel = new WelcomePanel();
         factory = FactoryEntities.getInstance();
-        mapper = new ListMapper();
         helper = new Helper();
+        validator = new Validator();
+        errors = Errors.getInstance();
     }
 
     @Override
@@ -53,9 +57,17 @@ public class MainController extends Controller{
                 this.start.dispose();
                 break;
             case QUOTE:
-                double priceForm = Double.parseDouble(String.valueOf(panel.getPriceGarment().getText()));
-                int amountForm = Integer.parseInt(String.valueOf(panel.getAmountGarment().getText()));
-                getQuote(panel, priceForm, amountForm);
+                String testPrice = String.valueOf(panel.getPriceGarment().getText());
+                String testAmount = String.valueOf(panel.getAmountGarment().getText());
+
+                try{
+                    validator.validData(testPrice);
+                    validator.validData(testAmount);
+                    getQuote(panel, Double.parseDouble(testPrice), Integer.parseInt(testAmount));
+                } catch (Exceptions e) {
+                    errors.logError(e.getError());
+                    new MessageError("Ingreso de Datos", "Ha ingresado datos erróneos o no numéricos.");
+                }
                 break;
             case NEW_QUOTES:
                 clearComponents(panel);
@@ -78,15 +90,20 @@ public class MainController extends Controller{
         panel.setAmountStock(String.valueOf(" "));
         panel.setDetailQuote(String.valueOf(" "));
         panel.setAmountStock(String.valueOf(" "));
+        panel.setPriceGarment(String.valueOf(" "));
+        panel.setAmountGarment(String.valueOf(" "));
         panel.getGarmentPant().setSelected(false);
         panel.getGarmentShirt().setSelected(false);
         panel.getShirtShort().setSelected(false);
         panel.getShirtLong().setSelected(false);
         panel.getPantCommon().setSelected(false);
         panel.getPantChupin().setSelected(false);
+        panel.getQualityStandard().setSelected(false);
+        panel.getQualityPremium().setSelected(false);
+        panel.getNeckCommon().setSelected(false);
     }
 
-    private void getQuote(MainPanel mainPanel, double getPrice, int cant) {
+    private void getQuote(MainPanel mainPanel, double getPrice, int cant) throws InvalidStockException {
         Shirt shirt = null;
         Pants pants = null;
         double finalPrice = 0;
@@ -165,13 +182,17 @@ public class MainController extends Controller{
             finalPrice = helper.calculatePricePremiumPants(getPrice,pants) * cant;
         }
 
-        Quotes quotes = factory.createQuotes(mainPanel.getListQuotes().listSize(), finalPrice,cant);
-        quotes.setNameSeller(mainPanel.getSeller().getName() + " " + mainPanel.getSeller().getSurname());
-        mainPanel.getListQuotes().add(quotes);
-        new MessageInformation("Precio de la cotizacion", String.valueOf(finalPrice));
-        mainPanel.setAmountStock(String.valueOf(stock));
-        mainPanel.setDetailQuote(String.valueOf(finalPrice));
+        try{
+            validator.validStock(stock);
+            Quotes quotes = factory.createQuotes(mainPanel.getListQuotes().listSize(), finalPrice,cant);
+            quotes.setNameSeller(mainPanel.getSeller().getName() + " " + mainPanel.getSeller().getSurname());
+            mainPanel.getListQuotes().add(quotes);
+            mainPanel.setAmountStock(String.valueOf(stock));
+            mainPanel.setDetailQuote(String.valueOf(finalPrice));
+        } catch (Exceptions e){
+            errors.logError(e.getError());
+            new MessageError("Stock No Disponible", "Está realizando una consulta sobre un producto el cual no hay stock disponible");
+        }
     }
-
 
 }

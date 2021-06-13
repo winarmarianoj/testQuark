@@ -1,7 +1,6 @@
 package com.marianowinar.persistance.impl;
 
 import com.marianowinar.logic.entity.Quotes;
-import com.marianowinar.logic.entity.Seller;
 import com.marianowinar.persistance.IListPersistance;
 
 import java.util.ArrayList;

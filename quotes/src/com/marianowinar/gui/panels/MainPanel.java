@@ -27,7 +27,6 @@ public class MainPanel extends Panel{
     private final ListShirt listShirt;
     private final ListMapper mapper;
 
-
     private static final int PANEL_WIDTH = 1600;
     private static final int PANEL_HEIGHT = 900;
     private static final int MARGIN = 20;
@@ -106,7 +105,6 @@ public class MainPanel extends Panel{
         listQuotes = new ListQuotes();
         listShirt = new ListShirt();
         mapper = new ListMapper();
-
         createEntities();
     }
 
@@ -115,13 +113,11 @@ public class MainPanel extends Panel{
         java.util.List<Shirt> shirtLongList = mapper.createShirtLong();
         java.util.List<Pants> pantsChupinList = mapper.createPantChupin();
         List<Pants> pantsCommonList = mapper.createPantCommon();
-
         this.listShirt.addList(shirtShortList);
         this.listShirt.addList(shirtLongList);
         this.listPants.addList(pantsChupinList);
         this.listPants.addList(pantsCommonList);
     }
-
 
     @Override
     protected void init() {

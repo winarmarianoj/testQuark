@@ -14,19 +14,14 @@ public class Helper {
     private static final double AUMENTO_2 = 1.3;
 
     public double calculatePriceStandardShirt(double priceForm, Shirt shirt) {
-        double price = 0;
-        price = calcShirt(priceForm,shirt);
-        return price;
+        return calcShirt(priceForm,shirt);
     }
 
     public double calculatePricePremiumShirt(double priceForm, Shirt shirt) {
-        double price = 0;
-        price = calcShirt(priceForm,shirt);
-        price = price * AUMENTO_2;
-        return price;
+        return calcShirt(priceForm,shirt) * AUMENTO_2;
     }
     private double calcShirt(double priceForm, Shirt shirt) {
-        double price = 0;
+        double price = priceForm;
 
         if(shirt.getTypeShirt().equals(TypeShirt.SHORT)) price = priceForm + (priceForm * - DESCUENTO_1);
 
@@ -40,16 +35,11 @@ public class Helper {
     }
 
     public double calculatePriceStandardPants(double priceForm, Pants pants) {
-        double price = 0;
-        price = calculatePants(priceForm,pants);
-        return price;
+        return calculatePants(priceForm,pants);
     }
 
     public double calculatePricePremiumPants(double priceForm, Pants pants) {
-        double price = 0;
-        price = calculatePants(priceForm,pants);
-        price = price * AUMENTO_2;
-        return price;
+        return calculatePants(priceForm,pants) * AUMENTO_2;
     }
 
     private double calculatePants(double priceForm, Pants pants) {
@@ -59,6 +49,5 @@ public class Helper {
         }
         return price;
     }
-
 
 }
