@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="quotes:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/quotes_jar</output-path>
+    <root id="archive" name="quotes.jar">
+      <element id="module-output" name="quotes" />
+    </root>
+  </artifact>
+</component>
